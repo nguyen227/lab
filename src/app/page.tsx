@@ -65,6 +65,35 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* About Section */}
+      <section className="py-24 border-t border-border-subtle">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 text-left">
+          <div>
+            <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/20 mb-4 block">
+              The Creator
+            </h2>
+            <p className="text-xl font-bold tracking-tight">Nguyen Vu.</p>
+          </div>
+          <div className="space-y-8">
+            <p className="text-foreground/40 leading-relaxed font-normal">
+              Senior Software Engineer focused on building resilient distributed
+              systems, high-performance infrastructure, and minimalist developer
+              experiences. The Lab is a space for public prototyping and
+              technical documentation.
+            </p>
+            <a
+              href="https://nguyen227.dev"
+              className="inline-flex items-center space-x-4 text-[10px] font-black uppercase tracking-[0.4em] text-foreground/20 hover:text-foreground transition-colors group"
+            >
+              <span>Visit Full Portfolio</span>
+              <span className="group-hover:translate-x-2 transition-transform">
+                →
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -16,6 +16,7 @@ const navItems = [
   { name: 'Projects', href: '/' },
   { name: 'Tools', href: '/tools' },
   { name: 'Resources', href: '/resources' },
+  { name: 'About Me', href: 'https://nguyen227.dev', external: true },
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -49,17 +50,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="flex items-center space-x-8">
               {navItems.map((item) => {
                 const isActive =
-                  pathname === item.href ||
-                  (item.href === '/tools' && pathname.startsWith('/tools/'));
+                  !item.external &&
+                  (pathname === item.href ||
+                    (item.href === '/tools' && pathname.startsWith('/tools/')));
+
+                const classes = cn(
+                  'text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:text-foreground',
+                  isActive ? 'text-foreground' : 'text-foreground/30',
+                );
+
+                if (item.external) {
+                  return (
+                    <a key={item.href} href={item.href} className={classes}>
+                      {item.name}
+                    </a>
+                  );
+                }
+
                 return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      'text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:text-foreground',
-                      isActive ? 'text-foreground' : 'text-foreground/30',
-                    )}
-                  >
+                  <Link key={item.href} href={item.href} className={classes}>
                     {item.name}
                   </Link>
                 );

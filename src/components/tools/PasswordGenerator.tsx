@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Copy, RefreshCw, Check } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
@@ -43,13 +43,35 @@ export default function PasswordGenerator() {
   );
   const [copied, setCopied] = useState(false);
 
-  const generatePassword = useCallback(() => {
-    setPassword(createPassword(length, useUppercase, useNumbers, useSymbols));
-  }, [length, useUppercase, useNumbers, useSymbols]);
+  const generate = useCallback(
+    (l: number, u: boolean, n: boolean, s: boolean) => {
+      setPassword(createPassword(l, u, n, s));
+    },
+    [],
+  );
 
-  useEffect(() => {
-    generatePassword();
-  }, [generatePassword]);
+  const handleLengthChange = (val: number) => {
+    setLength(val);
+    generate(val, useUppercase, useNumbers, useSymbols);
+  };
+
+  const toggleUppercase = () => {
+    const next = !useUppercase;
+    setUseUppercase(next);
+    generate(length, next, useNumbers, useSymbols);
+  };
+
+  const toggleNumbers = () => {
+    const next = !useNumbers;
+    setUseNumbers(next);
+    generate(length, useUppercase, next, useSymbols);
+  };
+
+  const toggleSymbols = () => {
+    const next = !useSymbols;
+    setUseSymbols(next);
+    generate(length, useUppercase, useNumbers, next);
+  };
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(password);
@@ -100,20 +122,20 @@ export default function PasswordGenerator() {
             min="8"
             max="128"
             value={length}
-            onChange={(e) => setLength(parseInt(e.target.value))}
+            onChange={(e) => handleLengthChange(parseInt(e.target.value))}
             className="w-full h-1 bg-foreground/[0.05] rounded-full appearance-none cursor-pointer accent-foreground"
           />
         </section>
 
         <section className="flex flex-wrap gap-4">
           {[
-            { label: 'Uppercase', state: useUppercase, set: setUseUppercase },
-            { label: 'Numbers', state: useNumbers, set: setUseNumbers },
-            { label: 'Special', state: useSymbols, set: setUseSymbols },
+            { label: 'Uppercase', state: useUppercase, set: toggleUppercase },
+            { label: 'Numbers', state: useNumbers, set: toggleNumbers },
+            { label: 'Special', state: useSymbols, set: toggleSymbols },
           ].map((opt) => (
             <button
               key={opt.label}
-              onClick={() => opt.set(!opt.state)}
+              onClick={opt.set}
               className={cn(
                 'px-5 py-2.5 rounded-lg border text-[10px] font-bold uppercase tracking-widest transition-all',
                 opt.state
@@ -127,7 +149,7 @@ export default function PasswordGenerator() {
         </section>
 
         <button
-          onClick={generatePassword}
+          onClick={() => generate(length, useUppercase, useNumbers, useSymbols)}
           className="w-full bg-foreground/[0.05] hover:bg-foreground/[0.1] text-foreground font-bold h-14 rounded-lg flex items-center justify-center space-x-3 transition-all active:scale-[0.99]"
         >
           <RefreshCw className="w-4 h-4" />
