@@ -4,7 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Github } from 'lucide-react';
+import { Github, Search, Command } from 'lucide-react';
+
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -74,6 +75,24 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 );
               })}
             </div>
+
+            <button
+              onClick={() =>
+                window.dispatchEvent(new CustomEvent('open-command-palette'))
+              }
+              className="flex items-center gap-6 px-3 py-1.5 rounded-full border border-border-subtle bg-foreground/[0.02] hover:bg-foreground/[0.05] transition-all group"
+            >
+              <div className="flex items-center gap-2">
+                <Search className="w-3 h-3 text-foreground/20 group-hover:text-foreground/40 transition-colors" />
+                <span className="text-[10px] font-bold text-foreground/20 group-hover:text-foreground/40 transition-colors uppercase tracking-widest leading-none">
+                  Search
+                </span>
+              </div>
+              <div className="flex items-center gap-1 opacity-20 group-hover:opacity-40 transition-opacity">
+                <Command className="w-2.5 h-2.5" />
+                <span className="text-[10px] font-black">K</span>
+              </div>
+            </button>
 
             <div className="h-4 w-[1px] bg-border-subtle" />
 

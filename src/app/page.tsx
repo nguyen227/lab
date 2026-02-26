@@ -3,29 +3,7 @@
 import React from 'react';
 import ProjectCard from '@/components/ProjectCard';
 
-const projects = [
-  {
-    title: 'Distributed Task Scheduler',
-    description:
-      'A fault-tolerant, high-performance task scheduler built with Go and Redis. Handles 1M+ concurrent jobs.',
-    tags: ['Go', 'Redis', 'gRPC'],
-    href: 'https://lab.nguyen227.dev',
-  },
-  {
-    title: 'AI Canvas',
-    description:
-      'An experimental drawing tool powered by Stable Diffusion. Generates art based on strokes and prompts.',
-    tags: ['Python', 'PyTorch', 'Next.js'],
-    href: 'https://lab.nguyen227.dev',
-  },
-  {
-    title: 'Crypto Indexer',
-    description:
-      'High-speed blockchain indexer for Ethereum-based networks. Optimized for analytical queries.',
-    tags: ['Rust', 'PostgreSQL', 'Kafka'],
-    href: 'https://lab.nguyen227.dev',
-  },
-];
+import { projects } from '@/lib/constants';
 
 export default function Home() {
   return (

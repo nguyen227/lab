@@ -10,12 +10,7 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-const quickTools = [
-  { title: 'Password Generator', href: '/tools/password-generator' },
-  { title: 'Bcrypt Utility', href: '/tools/bcrypt' },
-  { title: 'JWT Decoder', href: '/tools/jwt-decoder' },
-  { title: 'Crontab Builder', href: '/tools/crontab' },
-];
+import { tools } from '@/lib/constants';
 
 export default function QuickTools() {
   const pathname = usePathname();
@@ -26,7 +21,7 @@ export default function QuickTools() {
         Index
       </h3>
       <div className="space-y-1">
-        {quickTools.map((tool) => {
+        {tools.map((tool) => {
           const isActive = pathname === tool.href;
           return (
             <Link

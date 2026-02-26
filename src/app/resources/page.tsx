@@ -3,50 +3,7 @@
 import React from 'react';
 import ResourceCard from '@/components/ResourceCard';
 
-const resources = [
-  {
-    title: 'Awesome System Design',
-    description:
-      'A curated list of system design topics, case studies and resources.',
-    url: 'https://github.com/donnemartin/system-design-primer',
-    category: 'Architecture',
-  },
-  {
-    title: 'Refactoring.Guru',
-    description:
-      'The ultimate guide to design patterns and refactoring. Visual and practical.',
-    url: 'https://refactoring.guru/',
-    category: 'Design Patterns',
-  },
-  {
-    title: 'React Patterns',
-    description:
-      'A compilation of common patterns and best practices for React components.',
-    url: 'https://reactpatterns.com/',
-    category: 'Frontend',
-  },
-  {
-    title: 'Go by Example',
-    description:
-      'Hands-on introduction to Go using annotated example programs.',
-    url: 'https://gobyexample.com/',
-    category: 'Backend',
-  },
-  {
-    title: 'Next.js Documentation',
-    description:
-      'Official documentation for Next.js, including App Router and Turbopack.',
-    url: 'https://nextjs.org/docs',
-    category: 'Framework',
-  },
-  {
-    title: 'High Performance Browser Networking',
-    description:
-      'What every web developer should know about networking and browser performance.',
-    url: 'https://hpbn.co/',
-    category: 'Performance',
-  },
-];
+import { resources } from '@/lib/constants';
 
 export default function ResourcesPage() {
   return (

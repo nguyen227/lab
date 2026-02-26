@@ -3,32 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-const tools = [
-  {
-    title: 'Password Generator',
-    description: 'Cryptographically secure entropy engine.',
-    href: '/tools/password-generator',
-    index: '01',
-  },
-  {
-    title: 'Bcrypt Utility',
-    description: 'Enterprise hashing and verification workspace.',
-    href: '/tools/bcrypt',
-    index: '02',
-  },
-  {
-    title: 'JWT Decoder',
-    description: 'Local-first token inspection and debugging.',
-    href: '/tools/jwt-decoder',
-    index: '03',
-  },
-  {
-    title: 'Crontab Builder',
-    description: 'Visual scheduler for automated task management.',
-    href: '/tools/crontab',
-    index: '04',
-  },
-];
+import { tools } from '@/lib/constants';
 
 export default function ToolsPage() {
   return (
