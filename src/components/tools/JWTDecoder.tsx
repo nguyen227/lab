@@ -42,14 +42,14 @@ export default function JWTDecoder() {
 
       setHeader(decodedHeader);
       setPayload(decodedPayload);
-    } catch (e: unknown) {
+    } catch {
       setError('Malformed or invalid token encoding.');
       setHeader(null);
       setPayload(null);
     }
   };
 
-  const copyResult = (data: any) => {
+  const copyResult = (data: Record<string, unknown> | null) => {
     if (!data) return;
     navigator.clipboard.writeText(JSON.stringify(data, null, 2));
     setCopied(true);

@@ -9,21 +9,21 @@ const projects = [
     description:
       'A fault-tolerant, high-performance task scheduler built with Go and Redis. Handles 1M+ concurrent jobs.',
     tags: ['Go', 'Redis', 'gRPC'],
-    href: 'https://nguyen227.dev/tech-lab',
+    href: 'https://lab.nguyen227.dev',
   },
   {
     title: 'AI Canvas',
     description:
       'An experimental drawing tool powered by Stable Diffusion. Generates art based on strokes and prompts.',
     tags: ['Python', 'PyTorch', 'Next.js'],
-    href: 'https://nguyen227.dev/tech-lab',
+    href: 'https://lab.nguyen227.dev',
   },
   {
     title: 'Crypto Indexer',
     description:
       'High-speed blockchain indexer for Ethereum-based networks. Optimized for analytical queries.',
     tags: ['Rust', 'PostgreSQL', 'Kafka'],
-    href: 'https://nguyen227.dev/tech-lab',
+    href: 'https://lab.nguyen227.dev',
   },
 ];
 

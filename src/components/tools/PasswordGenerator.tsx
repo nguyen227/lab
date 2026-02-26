@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Copy, RefreshCw, Check } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -10,30 +10,41 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+function createPassword(
+  length: number,
+  useUppercase: boolean,
+  useNumbers: boolean,
+  useSymbols: boolean,
+) {
+  const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+  const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const numbers = '0123456789';
+  const symbols = '!@#$%^&*()_+~`|}{[]:;?><,./-=';
+
+  let chars = lowercase;
+  if (useUppercase) chars += uppercase;
+  if (useNumbers) chars += numbers;
+  if (useSymbols) chars += symbols;
+
+  let generated = '';
+  for (let i = 0; i < length; i++) {
+    generated += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return generated;
+}
+
 export default function PasswordGenerator() {
-  const [password, setPassword] = useState('');
   const [length, setLength] = useState(32);
   const [useUppercase, setUseUppercase] = useState(true);
   const [useNumbers, setUseNumbers] = useState(true);
   const [useSymbols, setUseSymbols] = useState(true);
+  const [password, setPassword] = useState(() =>
+    createPassword(32, true, true, true),
+  );
   const [copied, setCopied] = useState(false);
 
   const generatePassword = useCallback(() => {
-    const lowercase = 'abcdefghijklmnopqrstuvwxyz';
-    const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const numbers = '0123456789';
-    const symbols = '!@#$%^&*()_+~`|}{[]:;?><,./-=';
-
-    let chars = lowercase;
-    if (useUppercase) chars += uppercase;
-    if (useNumbers) chars += numbers;
-    if (useSymbols) chars += symbols;
-
-    let generated = '';
-    for (let i = 0; i < length; i++) {
-      generated += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    setPassword(generated);
+    setPassword(createPassword(length, useUppercase, useNumbers, useSymbols));
   }, [length, useUppercase, useNumbers, useSymbols]);
 
   useEffect(() => {

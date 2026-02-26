@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useMemo } from 'react';
 import { Check, Copy, Clock } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -12,19 +11,15 @@ function cn(...inputs: ClassValue[]) {
 
 export default function CrontabGenerator() {
   const [expression, setExpression] = useState('* * * * *');
-  const [description, setDescription] = useState('Every minute');
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    if (expression === '* * * * *') setDescription('Every minute');
-    else if (expression === '0 * * * *')
-      setDescription('Every hour, at minute 0');
-    else if (expression === '0 0 * * *')
-      setDescription('Every day at midnight');
-    else if (expression === '0 0 * * 0')
-      setDescription('Every Sunday at midnight');
-    else if (expression === '*/5 * * * *') setDescription('Every 5 minutes');
-    else setDescription('Custom schedule configuration');
+  const description = useMemo(() => {
+    if (expression === '* * * * *') return 'Every minute';
+    if (expression === '0 * * * *') return 'Every hour, at minute 0';
+    if (expression === '0 0 * * *') return 'Every day at midnight';
+    if (expression === '0 0 * * 0') return 'Every Sunday at midnight';
+    if (expression === '*/5 * * * *') return 'Every 5 minutes';
+    return 'Custom schedule configuration';
   }, [expression]);
 
   const copyToClipboard = () => {
@@ -85,7 +80,7 @@ export default function CrontabGenerator() {
               Human Readable Status
             </h4>
             <p className="text-xl font-bold tracking-tight italic">
-              "{description}"
+              &ldquo;{description}&rdquo;
             </p>
           </div>
         </div>
